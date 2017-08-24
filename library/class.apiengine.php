@@ -123,7 +123,9 @@ final class APIEngine
         if ($isWriteMethod) {
             // Set the transient key since we no longer have a front-end that
             // takes care of doing it for us
-            $inputData["TransientKey"] = Gdn::session()->transientKey();
+            //FIX not auto genering transient key
+            $inputData["TransientKey"] = Gdn::session()->transientKey(md5('tk-' . time()), false);
+            //$inputData["TransientKey"] = Gdn::session()->transientKey();
 
             // Authentication is always required for write-methods
             $dispatch["authenticate"] = true;
